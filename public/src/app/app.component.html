@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Rate my cakes</h1>
+  <div class="row">
+    <div class="col">
+      <form (submit)="onSubmit()">
+        <p>Submit a cake to be rated</p>
+        <p>{{ newCake | json }}</p>
+        <div class="form-group">
+          <p>Baker name:</p>
+          <input type="text" name="newCake.baker" [(ngModel)]="newCake.baker">
+        </div>
+        <div class="form-group">
+          <p>Image url:</p>
+          <input type="text" name="newCake.img" [(ngModel)]="newCake.img">
+        </div>
+        <input class="btn btn-primary" type="submit">
+      </form>
+    </div>
+    <div class="row">
+      <div class="col cakes">
+        <p>{{ addRating | json }}</p>
+        <div *ngFor="let cake of cakes">
+          <div class="row">
+            <div class="col">
+              <img (click)="getShowCakeFromService(cake._id)" src="{{ cake.img }}" width=200>
+            </div>
+            <div class="col">
+              <form (submit)="onRating(cake._id)">
+                <select class="align-top" name="addRating.rating" [(ngModel)]="addRating.rating">
+                  <option value="1">1 star</option>
+                  <option value="2">2 stars</option>
+                  <option value="3">3 stars</option>
+                  <option value="4">4 stars</option>
+                  <option value="5">5 stars</option>
+                </select>
+                <textarea name="addRating.comment" [(ngModel)]="addRating.comment">Type your comment here</textarea>
+                <input class="btn btn-secondary" type="submit">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </div>
+    <div class="row">
+      <app-cake *ngIf="showCake" [cakeToShow]="showCake" [cakeAvg]="avg"></app-cake>
+    </div>
+  </div>
+</div>

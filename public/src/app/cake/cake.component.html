@@ -1,0 +1,12 @@
+<div class="col">
+	<img src="{{ cakeToShow.img }}" width=600>
+</div>
+<p>Average rating:{{ cakeAvg }} </p>
+<div *ngFor="let rating of cakeToShow.ratings">
+	<div class="col">
+		<div class="border">
+			<p>Comment: {{ rating.comments }}</p>
+			<p>Rating: {{ rating.rating }}</p>
+		</div>
+	</div>
+</div>
